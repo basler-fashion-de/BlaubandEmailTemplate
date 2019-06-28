@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service class="BlaubandEmailTemplate\Subscribers\Backend" id="blauband_email_template.subscribers.Backend">
+            <argument>%blauband_email_template.plugin_dir%</argument>
+            <argument type="service" id="models"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="blauband_email_template.services.mail_service"
+                 class="BlaubandEmailTemplate\Services\MailService"
+                 decorates="blauband_email.services.email_service"
+                 public="false">
+            <argument type="service" id="blauband_email_template.services.mail_service.inner"/>
+        </service>
+
+    </services>
+</container>
