@@ -47,6 +47,10 @@ class Attributes
         /** @var Mail $blaubandMail */
         $blaubandMail = $repository->findOneBy(['name' => 'blaubandMail']);
 
+        if($blaubandMail === null){
+            $blaubandMail = $repository->findOneBy(['name' => 'Blauband Mail']);
+        }
+
         if($blaubandMail){
             $attributes = $blaubandMail->getAttribute();
             if(!$attributes){
@@ -70,6 +74,10 @@ class Attributes
                 'blauband_custom_template',
                 true
             );
+
+            $metaDataCache = $this->modelManager->getConfiguration()->getMetadataCacheImpl();
+            $metaDataCache->deleteAll();
+            $this->modelManager->generateAttributeModels(['s_core_config_mails_attributes']);
         }catch (\Exception $e){
             //Es gab Fälle in dem das deinstallieren nicht klappte.
             //In Zukunft haben wir lieber Datenmüll als dass die Deinstallation nicht geht
@@ -90,7 +98,7 @@ class Attributes
             [
                 'label' => 'Blauband Custom Mailvorlage',
                 'supportText' => 'Wenn aktiv, kann diese Vorlage beim Versenden von personalisierten Email verwendet werden.',
-                'displayInBackend' => true,
+                'displayInBackend' => false,
                 'custom' => false,
             ]
         );

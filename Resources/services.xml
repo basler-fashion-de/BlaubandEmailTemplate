@@ -16,6 +16,5 @@
                  public="false">
             <argument type="service" id="blauband_email_template.services.mail_service.inner"/>
         </service>
-
     </services>
 </container>

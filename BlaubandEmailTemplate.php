@@ -2,7 +2,9 @@
 
 namespace BlaubandEmailTemplate;
 
+use BlaubandEmail\Services\ConfigService;
 use BlaubandEmailTemplate\Installers\Attributes;
+use BlaubandEmailTemplate\Installers\Mails;
 use Shopware\Components\Plugin;
 use Shopware\Components\Plugin\Context\InstallContext;
 use Shopware\Components\Plugin\Context\UninstallContext;
@@ -29,13 +31,27 @@ class BlaubandEmailTemplate extends Plugin
             $this->container->get('shopware_attribute.crud_service'),
             $this->container->get('models')
         ))->install();
+
+        (new Mails(
+            $this->container->get('models'),
+            new ConfigService($this->getPath() . '/Resources/mails.xml'),
+            $this->getPath()
+        ))->install();
     }
 
     public function uninstall(UninstallContext $context)
     {
-        (new Attributes(
-            $this->container->get('shopware_attribute.crud_service'),
-            $this->container->get('models')
-        ))->uninstall();
+        if(!$context->keepUserData()){
+            (new Mails(
+                $this->container->get('models'),
+                new ConfigService($this->getPath() . '/Resources/mails.xml'),
+                $this->getPath()
+            ))->uninstall();
+
+            (new Attributes(
+                $this->container->get('shopware_attribute.crud_service'),
+                $this->container->get('models')
+            ))->uninstall();
+        }
     }
 }
