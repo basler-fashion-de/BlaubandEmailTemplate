@@ -8,20 +8,19 @@
         <htmlContent>
             <![CDATA[
             {include file="string:{config name=emailheaderhtml}"}
-
-            {if $customer.salutation == 'ms'}Frau{else}Herr{/if} {$customer.firstname} {$customer.lastname}
             <br/>
             {$htmlMailContent|nl2br}
-
-            Kundennummer: {$customer.customernumber}
-
+            <br/>
+            Kundennummer: {$customer.customernumber}<br/>
+            <br/>
             {include file="string:{config name=emailfooterhtml}"}
             ]]>
         </htmlContent>
         <plainContent>
-{if $customer.salutation == 'ms'}Frau{else}Herr{/if} {$customer.firstname} {$customer.lastname}
 
 {$plainMailContent|trim}
+
+Kundennummer: {$customer.customernumber}<br/>
         </plainContent>
         <isHtml>true</isHtml>
     </mails>
@@ -34,46 +33,59 @@
         <htmlContent>
             <![CDATA[
             {include file="string:{config name=emailheaderhtml}"}
+            <br/>
             {$htmlMailContent|nl2br}
+            <br/>
+            <strong>Informationen zu Ihrer Bestellung:</strong>
+            <table width="80%" border="0">
+                <tr>
+                    <td><strong>Pos.</strong></td>
+                    <td><strong>Artikel</strong></td>
+                    <td><strong>Art-Nr.</strong></td>
+                    <td><strong>Menge</strong></td>
+                    <td><strong>Preis</strong></td>
+                    <td><strong>Summe</strong></td>
+                </tr>
 
-            <strong>Informationen zu Ihrer Bestellung:</strong></p>
-            <table width="80%" border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:10px;">
-            <tr>
-                <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Artikel</strong></td>
-                <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Pos.</strong></td>
-                <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Art-Nr.</strong></td>
-                <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Menge</strong></td>
-                <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Preis</strong></td>
-                <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Summe</strong></td>
-            </tr>
+                {foreach item=details key=position from=$order.details}
+                    {$amount = $details.price * $details.quantity}
 
-            {foreach item=details key=position from=$order.details}
-            <tr>
-                <td rowspan="2" style="border-bottom:1px solid #cccccc;">{if $details.image.src.0 && $details.modus != 2}<img style="height: 57px;" height="57" src="{$details.image.src.0}" alt="{$details.articlename}" />{else} {/if}</td>
-                <td>{$position+1|fill:4} </td>
-                <td>{$details.ordernumber|fill:20}</td>
-                <td>{$details.quantity|fill:6}</td>
-                <td>{$details.price|padding:8}{$sCurrency}</td>
-                <td>{$details.amount|padding:8} {$sCurrency}</td>
-            </tr>
-            <tr>
-                <td colspan="5" style="border-bottom:1px solid #cccccc;">{$details.articlename|wordwrap:80|indent:4}</td>
-            </tr>
-            {/foreach}
-
+                    <tr>
+                        <td>{$position+1|fill:4} </td>
+                        <td>{$details.name|wordwrap:80|indent:4}</td>
+                        <td>{$details.ordernumber|fill:20}</td>
+                        <td>{$details.quantity|fill:6}</td>
+                        <td>{$details.price|padding:8} {$currency}</td>
+                        <td>{$amount|padding:8} {$currency}</td>
+                    </tr>
+                {/foreach}
             </table>
-            {include file="string:{config name=emailfooterhtml}"}
+            <br/>
+            <br/>
+            Versandkosten: {$order.invoice_shipping|currency}<br/>
+            Gesamtkosten Netto: {$order.invoice_amount_net|currency}<br/>
+			{$taxAmount = $order.invoice_amount - $order.invoice_amount_net}
+			zzgl. {$taxAmount|currency} Mwst<br/>
+            <br/>
+            <strong>Gesamtkosten Brutto: {$order.invoice_amount|currency}</strong>
+            <br/>
 
+            {include file="string:{config name=emailfooterhtml}"}
             ]]>
         </htmlContent>
         <plainContent>
 {$plainMailContent|trim}
 
-Pos. Art.Nr.              Menge         Preis        Summe
-{foreach item=details key=position from=$sOrderDetails}
-{$position+1|fill:4}    {$details.ordernumber|fill:20} {$details.quantity|fill:6}      {$details.price|padding:8} EUR {$details.amount|padding:8} EUR
-{$details.articlename|wordwrap:49|indent:5}
+Pos. Art.						   Nr.              Menge         Preis        Summe
+{foreach item=details key=position from=$order.details}{$amount = $details.price * $details.quantity}
+{$position+1|fill:4}{$details.name|wordwrap:49|indent:5}{$details.ordernumber|fill:20}{$details.quantity|fill:6}{$details.price|padding:8} EUR {$amount|padding:8} EUR
 {/foreach}
+Versandkosten: {$order.invoice_shipping|currency}
+Gesamtkosten Netto: {$order.invoice_amount_net|currency}
+{$taxAmount = $order.invoice_amount - $order.invoice_amount_net}
+zzgl. {$taxAmount|currency} Mwst
+
+Gesamtkosten Brutto: {$order.invoice_amount|currency}
         </plainContent>
         <isHtml>true</isHtml>
     </mails>

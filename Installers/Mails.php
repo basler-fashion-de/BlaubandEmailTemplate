@@ -54,7 +54,10 @@ class Mails
 
         foreach ($this->mails as $mail) {
             $mailModel = $repository->findOneBy(['name' => $mail['name']]);
-            $this->modelManager->remove($mailModel);
+
+            if($mailModel){
+                $this->modelManager->remove($mailModel);
+            }
         }
 
         $this->modelManager->flush();
@@ -77,13 +80,13 @@ class Mails
         if(is_file($this->pluginRoot.$data['plainContent'])){
             $mailModel->setContent(file_get_contents($this->pluginRoot.$data['plainContent']));
         }else{
-            $mailModel->setContent($data['plainContent']);
+            $mailModel->setContent((string) $data['plainContent']);
         }
 
         if(is_file($this->pluginRoot.$data['htmlContent'])){
             $mailModel->setContentHtml(file_get_contents($this->pluginRoot.$data['htmlContent']));
         }else{
-            $mailModel->setContentHtml($data['htmlContent']);
+            $mailModel->setContentHtml((string) $data['htmlContent']);
         }
 
         $mailModel->setIsHtml(($data['isHtml'] == 'true'));
