@@ -20,7 +20,7 @@ class MailService implements MailServiceInterface
         $this->decoratedService->saveMail($mail);
     }
 
-    public function sendMail($to, $bcc, $context, $isHtml, $files = [], $template = 'blaubandMail')
+    public function sendMail($to, $bcc, $context, $isHtml, $files = [], $template = 'EKS-Template')
     {
         $request = Shopware()->Container()->get('front')->Request();
         $templateId = $request->get('template');

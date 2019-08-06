@@ -51,6 +51,10 @@ class Attributes
             $blaubandMail = $repository->findOneBy(['name' => 'Blauband Mail']);
         }
 
+        if($blaubandMail === null){
+            $blaubandMail = $repository->findOneBy(['name' => 'EKS-Template']);
+        }
+
         if($blaubandMail){
             $attributes = $blaubandMail->getAttribute();
             if(!$attributes){
