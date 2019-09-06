@@ -6,21 +6,25 @@
         <fromName>{$shopName}</fromName>
         <subject>{$mailSubject}</subject>
         <htmlContent>
-            <![CDATA[
+            <![CDATA[<div style="font-family:arial; font-size:12px;">
             {include file="string:{config name=emailheaderhtml}"}
-            <br/>
+            <br/><br/>
+	    <p>
             {$htmlMailContent|nl2br}
-            <br/>
+            <br/><br/>
             Kundennummer: {$customer.customernumber}<br/>
-            <br/>
+            </p>
             {include file="string:{config name=emailfooterhtml}"}
-            ]]>
+            </div>]]>
         </htmlContent>
         <plainContent>
+{include file="string:{config name=emailheaderplain}"}
 
 {$plainMailContent|trim}
 
-Kundennummer: {$customer.customernumber}<br/>
+Kundennummer: {$customer.customernumber}
+
+{include file="string:{config name=emailfooterplain}"}
         </plainContent>
         <isHtml>true</isHtml>
     </mails>
@@ -31,32 +35,31 @@ Kundennummer: {$customer.customernumber}<br/>
         <fromName>{$shopName}</fromName>
         <subject>{$mailSubject}</subject>
         <htmlContent>
-            <![CDATA[
+            <![CDATA[<div style="font-family:arial; font-size:12px;">
             {include file="string:{config name=emailheaderhtml}"}
-            <br/>
+            <br/><br/>
+	    <p>
             {$htmlMailContent|nl2br}
-            <br/>
+            <br/><br/>
             <strong>Informationen zu Ihrer Bestellung:</strong>
-            <table width="80%" border="0">
+            <table width="80%" border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
                 <tr>
-                    <td><strong>Pos.</strong></td>
-                    <td><strong>Artikel</strong></td>
-                    <td><strong>Art-Nr.</strong></td>
-                    <td><strong>Menge</strong></td>
-                    <td><strong>Preis</strong></td>
-                    <td><strong>Summe</strong></td>
+                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Pos.</strong></td>
+                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Artikel</strong></td>
+                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Menge</strong></td>
+                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Preis</strong></td>
+                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Summe</strong></td>
                 </tr>
 
                 {foreach item=details key=position from=$order.details}
                     {$amount = $details.price * $details.quantity}
 
                     <tr>
-                        <td>{$position+1|fill:4} </td>
-                        <td>{$details.name|wordwrap:80|indent:4}</td>
-                        <td>{$details.ordernumber|fill:20}</td>
-                        <td>{$details.quantity|fill:6}</td>
-                        <td>{$details.price|padding:8} {$currency}</td>
-                        <td>{$amount|padding:8} {$currency}</td>
+                        <td style="border-bottom:1px solid #cccccc;">{$position+1|fill:4} </td>
+                        <td style="border-bottom:1px solid #cccccc;">{$details.name|wordwrap:80|indent:4}<br/>Artikel-Nr: {$details.ordernumber|fill:20}</td>
+                        <td style="border-bottom:1px solid #cccccc;">{$details.quantity|fill:6}</td>
+                        <td style="border-bottom:1px solid #cccccc;">{$details.price|padding:8} {$currency}</td>
+                        <td style="border-bottom:1px solid #cccccc;">{$amount|padding:8} {$currency}</td>
                     </tr>
                 {/foreach}
             </table>
@@ -65,13 +68,13 @@ Kundennummer: {$customer.customernumber}<br/>
             Versandkosten: {$order.invoice_shipping|currency}<br/>
             Gesamtkosten Netto: {$order.invoice_amount_net|currency}<br/>
 			{$taxAmount = $order.invoice_amount - $order.invoice_amount_net}
-			zzgl. {$taxAmount|currency} Mwst<br/>
+			zzgl. {$taxAmount|currency} Mwst.<br/>
             <br/>
             <strong>Gesamtkosten Brutto: {$order.invoice_amount|currency}</strong>
             <br/>
-
+    	    </p>
             {include file="string:{config name=emailfooterhtml}"}
-            ]]>
+            </div>]]>
         </htmlContent>
         <plainContent>
 {$plainMailContent|trim}
