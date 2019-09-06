@@ -77,18 +77,22 @@ Kundennummer: {$customer.customernumber}
             </div>]]>
         </htmlContent>
         <plainContent>
+{include file="string:{config name=emailheaderplain}"}
+
 {$plainMailContent|trim}
 
-Pos. Art.						   Nr.              Menge         Preis        Summe
+Pos.  Art.Nr.               Name                                              Menge       Preis       Summe
 {foreach item=details key=position from=$order.details}{$amount = $details.price * $details.quantity}
-{$position+1|fill:4}{$details.name|wordwrap:49|indent:5}{$details.ordernumber|fill:20}{$details.quantity|fill:6}{$details.price|padding:8} EUR {$amount|padding:8} EUR
+{$position+1|fill:4}{$details.ordernumber|fill:20}{$details.name|wordwrap:49|indent:5}{$details.quantity|fill:6}{$details.price|padding:8} EUR {$amount|padding:8} EUR
 {/foreach}
+		
 Versandkosten: {$order.invoice_shipping|currency}
 Gesamtkosten Netto: {$order.invoice_amount_net|currency}
 {$taxAmount = $order.invoice_amount - $order.invoice_amount_net}
-zzgl. {$taxAmount|currency} Mwst
-
+zzgl. {$taxAmount|currency} Mwst.
 Gesamtkosten Brutto: {$order.invoice_amount|currency}
+
+{include file="string:{config name=emailfooterplain}"}
         </plainContent>
         <isHtml>true</isHtml>
     </mails>
