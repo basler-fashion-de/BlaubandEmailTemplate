@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <mails>
-        <name>Blauband Kundenvorlage</name>
+        <name>Blauband-Vorlage Kunde</name>
         <fromMail>{$mailFrom}</fromMail>
         <fromName>{$shopName}</fromName>
         <subject>{$mailSubject}</subject>
@@ -30,7 +30,7 @@ Kundennummer: {$customer.customernumber}
     </mails>
 
     <mails>
-        <name>Blauband Bestellung</name>
+        <name>Blauband-Vorlage Bestellung</name>
         <fromMail>{$mailFrom}</fromMail>
         <fromName>{$shopName}</fromName>
         <subject>{$mailSubject}</subject>
