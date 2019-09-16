@@ -42,11 +42,14 @@ class BlaubandEmailTemplate extends Plugin
     public function uninstall(UninstallContext $context)
     {
         if(!$context->keepUserData()){
-            (new Mails(
-                $this->container->get('models'),
-                new ConfigService($this->getPath() . '/Resources/mails.xml'),
-                $this->getPath()
-            ))->uninstall();
+            /* Die Email-Templates werden nicht gelöscht wegen dem Email-Log von Shopware.*/
+            if(!version_compare($this->container->get('config')->get('version'), '5.6.0', '>=')){
+                (new Mails(
+                    $this->container->get('models'),
+                    new ConfigService($this->getPath() . '/Resources/mails.xml'),
+                    $this->getPath()
+                ))->uninstall();
+            }
 
             (new Attributes(
                 $this->container->get('shopware_attribute.crud_service'),
