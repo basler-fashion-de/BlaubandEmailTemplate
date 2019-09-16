@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <mails>
-        <name>Blauband Kunden</name>
+        <name>Blauband Kundenvorlage</name>
         <fromMail>{$mailFrom}</fromMail>
         <fromName>{$shopName}</fromName>
         <subject>{$mailSubject}</subject>
