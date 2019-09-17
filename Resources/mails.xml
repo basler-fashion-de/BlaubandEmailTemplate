@@ -5,24 +5,17 @@
         <fromMail>{$mailFrom}</fromMail>
         <fromName>{$shopName}</fromName>
         <subject>{$mailSubject}</subject>
-        <htmlContent>
-            <![CDATA[<div style="font-family:arial; font-size:12px;">
-            {include file="string:{config name=emailheaderhtml}"}
-            <br/><br/>
-	    <p>
-            {$htmlMailContent|nl2br}
-            <br/><br/>
-            Kundennummer: {$customer.customernumber}<br/>
-            </p>
-            {include file="string:{config name=emailfooterhtml}"}
-            </div>]]>
+        <htmlContent><![CDATA[<div style="font-family:arial; font-size:12px;">
+{include file="string:{config name=emailheaderhtml}"}<br/><br/>
+Kundennummer: {$customer.customernumber}<br/><br/>
+<p>{$htmlMailContent|nl2br}<br/></p>
+{include file="string:{config name=emailfooterhtml}"}</div>]]>
         </htmlContent>
-        <plainContent>
-{include file="string:{config name=emailheaderplain}"}
-
-{$plainMailContent|trim}
+        <plainContent>{include file="string:{config name=emailheaderplain}"}
 
 Kundennummer: {$customer.customernumber}
+
+{$plainMailContent|trim}
 
 {include file="string:{config name=emailfooterplain}"}
         </plainContent>
@@ -34,26 +27,20 @@ Kundennummer: {$customer.customernumber}
         <fromMail>{$mailFrom}</fromMail>
         <fromName>{$shopName}</fromName>
         <subject>{$mailSubject}</subject>
-        <htmlContent>
-            <![CDATA[<div style="font-family:arial; font-size:12px;">
-            {include file="string:{config name=emailheaderhtml}"}
-            <br/><br/>
-	    <p>
-            {$htmlMailContent|nl2br}
-            <br/><br/>
-            <strong>Informationen zu Ihrer Bestellung:</strong>
-            <table width="80%" border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
-                <tr>
-                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Pos.</strong></td>
-                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Artikel</strong></td>
-                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Menge</strong></td>
-                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Preis</strong></td>
-                    <td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Summe</strong></td>
-                </tr>
-
+        <htmlContent><![CDATA[<div style="font-family:arial; font-size:12px;">
+{include file="string:{config name=emailheaderhtml}"}<br/><br/>
+<p>{$htmlMailContent|nl2br}<br/><br/>
+<strong>Informationen zu Ihrer Bestellung:</strong>
+<table width="80%" border="0" style="font-family:Arial, Helvetica, sans-serif; font-size:12px;">
+	<tr>
+		<td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Pos.</strong></td>
+		<td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Artikel</strong></td>
+		<td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Menge</strong></td>
+		<td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Preis</strong></td>
+		<td bgcolor="#F7F7F2" style="border-bottom:1px solid #cccccc;"><strong>Summe</strong></td>
+	</tr>
                 {foreach item=details key=position from=$order.details}
                     {$amount = $details.price * $details.quantity}
-
                     <tr>
                         <td style="border-bottom:1px solid #cccccc;">{$position+1|fill:4} </td>
                         <td style="border-bottom:1px solid #cccccc;">{$details.name|wordwrap:80|indent:4}<br/>Artikel-Nr: {$details.ordernumber|fill:20}</td>
@@ -76,8 +63,7 @@ Kundennummer: {$customer.customernumber}
             {include file="string:{config name=emailfooterhtml}"}
             </div>]]>
         </htmlContent>
-        <plainContent>
-{include file="string:{config name=emailheaderplain}"}
+        <plainContent>{include file="string:{config name=emailheaderplain}"}
 
 {$plainMailContent|trim}
 
