@@ -69,14 +69,14 @@ Kundennummer: {$customer.customernumber}
 
 Pos.  Art.Nr.                   Name                                                Menge       Preis           Summe
 {foreach item=details key=position from=$order.details}{$amount = $details.price * $details.quantity}
-{$position+1|fill:4}      {$details.ordernumber|fill:20}  {$details.name|wordwrap:49|indent:5}    {$details.quantity|fill:6}  {$details.price|padding:8} EUR {$amount|padding:8} EUR
+{$position+1|fill:4}      {$details.ordernumber|fill:20}  {$details.name|wordwrap:49|indent:5}    {$details.quantity|fill:6}  {$details.price|padding:8} {$order.currency|unescape:"htmlall"} {$amount|padding:8} {$order.currency|unescape:"htmlall"}
 {/foreach}
 		
-Versandkosten: {$order.invoice_shipping|currency}
-Gesamtkosten Netto: {$order.invoice_amount_net|currency}
+Versandkosten: {$order.invoice_shipping|currency|unescape:"htmlall"}
+Gesamtkosten Netto: {$order.invoice_amount_net|currency|unescape:"htmlall"}
 {$taxAmount = $order.invoice_amount - $order.invoice_amount_net}
-zzgl. {$taxAmount|currency} Mwst.
-Gesamtkosten Brutto: {$order.invoice_amount|currency}
+zzgl. {$taxAmount|currency|unescape:"htmlall"} Mwst.
+Gesamtkosten Brutto: {$order.invoice_amount|currency|unescape:"htmlall"}
 
 {include file="string:{config name=emailfooterplain}"}
         </plainContent>
