@@ -9,11 +9,23 @@
     <link>www.blauband.com</link>
     <author>Blauband</author>
 
-    <compatibility minVersion="5.2.0" />
+    <description lang="de">
+        <![CDATA[
+
+        ]]>
+    </description>
+
+    <description lang="en">
+        <![CDATA[
+
+        ]]>
+    </description>
+
+    <compatibility minVersion="5.2.7" />
 
     <changelog version="1.0.0">
-        <changes lang="de">Erste Veröffentlichung</changes>
-        <changes lang="en">Initial Release</changes>
+        <changes lang="de">Erste Veröffentlichung 'Blauband EKS Email-Vorlagen Erweiterung'</changes>
+        <changes lang="en">First release 'Blauband EKS Mail-Template Extension'</changes>
     </changelog>
 
     <requiredPlugins>

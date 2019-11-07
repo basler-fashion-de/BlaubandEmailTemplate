@@ -2,7 +2,6 @@
 
 namespace BlaubandEmailTemplate\Installers;
 
-use Doctrine\ORM\EntityRepository;
 use Shopware\Models\Mail\Mail;
 use Shopware\Models\Attribute\Mail as MailAttribute;
 use Shopware\Components\Model\ModelManager;

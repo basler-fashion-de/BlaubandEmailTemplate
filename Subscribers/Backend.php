@@ -5,7 +5,6 @@ namespace BlaubandEmailTemplate\Subscribers;
 use Enlight\Event\SubscriberInterface;
 use Shopware\Components\Model\ModelManager;
 use Shopware\Models\Mail\Mail;
-use Shopware\Models\Shop\Shop;
 
 class Backend implements SubscriberInterface
 {
