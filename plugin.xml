@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
-    <label lang="de">Blauband EKS Email-Vorlagen Erweiterung</label>
-    <label lang="en">Blauband EKS Mail-Template Extension</label>
+    <label lang="de">Blauband EKS Templates</label>
+    <label lang="en">Blauband EKS Templates</label>
     <version>1.0.0</version>
     <copyright>(c) by Blauband GmbH</copyright>
     <license>proprietary</license>
     <link>www.blauband.com</link>
-    <author>Blauband</author>
+    <author>Blauband GmbH</author>
 
     <description lang="de">
         <![CDATA[
