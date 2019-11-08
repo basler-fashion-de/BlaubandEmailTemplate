@@ -16,14 +16,24 @@
     </changelog>
 
     <description lang="de">
-        <![CDATA[
-
+        <![CDATA[<p>Das Plugin ist eine Ergänzung zu unserem Plugin 
+        <a href="https://store.shopware.com/blaub72594318285f/e-mails-an-kunden-schicken.html">Emails an Kunden schicken (EKS)</a>. 
+        Es erlaubt Ihnen, eigene E-Mail-Templates zu erstellen und bequem aus dem E-Mail-Editor auszuwählen. 
+        Auf diese Weise können Sie Ihre Kunden-Kommunikation effizient professionalisieren.</p>
+        <p>Eine Dokumentation des Plugins finden Sie in der 
+        <a href="https://blauband-verlag.com/eks_doku.pdf" target="_blank" rel="noreferrer noopener">
+        Dokumentation des Basis-Plugins EKS.&nbsp;</a></p>
         ]]>
     </description>
 
     <description lang="en">
-        <![CDATA[
-
+        <![CDATA[<p>This plugin is an extension to our basic plugin 
+        <a href="https://store.shopware.com/blaub72594318285f/e-mails-an-kunden-schicken.html">Send Emails to Customers (SEC)</a>. 
+        It allows you, to create your own individual e-mail templates conveniently from the e-mail editor from our basic plugin. 
+        Through this you can efficiently personalize your customer communication.</p>
+        <p>You can find a user manual in the 
+        <a href="https://blauband-verlag.com/eks_doku.pdf" target="_blank" rel="noreferrer noopener">
+        documentation of the basic plugin SEC.&nbsp;</a></p>
         ]]>
     </description>
 
