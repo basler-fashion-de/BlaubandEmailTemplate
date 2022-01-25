@@ -8,7 +8,7 @@
     <license>proprietary</license>
     <link>https://blauband.com</link>
     <author>Blauband GmbH</author>
-    <compatibility minVersion="5.7.6" />
+    <compatibility minVersion="5.2.7" />
 
     <changelog version="1.0.0">
         <changes lang="de">Erste Veröffentlichung 'Blauband EKS Templates'</changes>
